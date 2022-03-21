@@ -30,9 +30,19 @@ import { addStatsForCompletedGame, loadStats } from './lib/stats'
 import {
   loadGameStateFromLocalStorage,
   saveGameStateToLocalStorage,
+  saveDeviceID,
   setStoredIsHighContrastMode,
   getStoredIsHighContrastMode,
 } from './lib/localStorage'
+
+import {
+getFromDB,
+updToDB
+} from './lib/toDB'
+import {
+  setCookie,
+  getCookie
+  } from './lib/cookies'
 import { default as GraphemeSplitter } from 'grapheme-splitter'
 
 import './App.css'
@@ -137,9 +147,19 @@ function App() {
   const clearCurrentRowClass = () => {
     setCurrentRowClass('')
   }
+  const { v4: uuidv4 } = require('uuid');
+  const devID =uuidv4();
+  // const deviceID = useState(
+  //   localStorage.getItem('deviceID')
+  //     ? {}: saveDeviceID({ devID })
+  // )
+  const deviceID=useState(getCookie('deviceID') ?{}: setCookie('deviceID',devID))
 
   useEffect(() => {
     saveGameStateToLocalStorage({ guesses, solution })
+    // @ts-ignore
+    var obj =( { guesses, solution } ,deviceID )
+    updToDB( {obj});
   }, [guesses])
 
   useEffect(() => {

@@ -1,15 +1,21 @@
 const gameStateKey = 'gameState'
 const highContrastKey = 'highContrast'
+const deviceIDKey = "deviceID"
 
 type StoredGameState = {
   guesses: string[]
   solution: string
 }
-
+type deviceID ={
+  devID : string
+}
+export const saveDeviceID = (devID : deviceID)=>{
+  localStorage.setItem(deviceIDKey, JSON.stringify(devID))
+}
 export const saveGameStateToLocalStorage = (gameState: StoredGameState) => {
   localStorage.setItem(gameStateKey, JSON.stringify(gameState))
 }
-
+export const saveGameStatetoDB = ()=>{}
 export const loadGameStateFromLocalStorage = () => {
   const state = localStorage.getItem(gameStateKey)
   return state ? (JSON.parse(state) as StoredGameState) : null

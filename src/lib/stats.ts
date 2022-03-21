@@ -1,10 +1,13 @@
+import { send } from 'process'
 import { MAX_CHALLENGES } from '../constants/settings'
 import {
   GameStats,
   loadStatsFromLocalStorage,
   saveStatsToLocalStorage,
 } from './localStorage'
-
+import {
+  sendToDB
+  } from './toDB'
 // In stats array elements 0-5 are successes in 1-6 trys
 
 export const addStatsForCompletedGame = (
@@ -32,6 +35,7 @@ export const addStatsForCompletedGame = (
   stats.successRate = getSuccessRate(stats)
 
   saveStatsToLocalStorage(stats)
+  sendToDB(stats)
   return stats
 }
 
@@ -46,6 +50,7 @@ const defaultStats: GameStats = {
 
 export const loadStats = () => {
   return loadStatsFromLocalStorage() || defaultStats
+  // yaha pe bhi kr skte DB vala kaam dekh lenge
 }
 
 const getSuccessRate = (gameStats: GameStats) => {
