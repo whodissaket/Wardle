@@ -27,6 +27,7 @@ import {
   unicodeLength,
 } from './lib/words'
 import { addStatsForCompletedGame, loadStats } from './lib/stats'
+
 import {
   loadGameStateFromLocalStorage,
   saveGameStateToLocalStorage,
@@ -39,6 +40,8 @@ import {
 getFromDB,
 updToDB
 } from './lib/toDB'
+
+
 import {
   setCookie,
   getCookie
@@ -153,13 +156,13 @@ function App() {
   //   localStorage.getItem('deviceID')
   //     ? {}: saveDeviceID({ devID })
   // )
-  const deviceID=useState(getCookie('deviceID') ?{}: setCookie('deviceID',devID))
-
+  const [deviceID,setdeviceID]=useState(getCookie('deviceID') ? getCookie('deviceID')  : setCookie('deviceID',devID))
+  console.log(getCookie('deviceID'))
   useEffect(() => {
     saveGameStateToLocalStorage({ guesses, solution })
-    // @ts-ignore
-    var obj =( { guesses, solution } ,deviceID )
-    updToDB( {obj});
+      // @ts-ignore
+    var obj:object = {deviceID ,guesses,solution} 
+    updToDB(obj);
   }, [guesses])
 
   useEffect(() => {
