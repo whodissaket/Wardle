@@ -9,7 +9,7 @@ import {
   sendToDB
   } from './toDB'
 // In stats array elements 0-5 are successes in 1-6 trys
-
+import { getCookie} from './cookies'
 export const addStatsForCompletedGame = (
   gameStats: GameStats,
   count: number
@@ -35,7 +35,9 @@ export const addStatsForCompletedGame = (
   stats.successRate = getSuccessRate(stats)
 
   saveStatsToLocalStorage(stats)
-  sendToDB(stats)
+  const deviceID:any=getCookie('deviceID')
+  var obj:object={stats,deviceID}
+  sendToDB(obj)
   return stats
 }
 
