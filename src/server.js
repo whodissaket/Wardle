@@ -22,7 +22,30 @@ mongodb.MongoClient.connect(
 
 //@ts-ignore
 const post = async  (req, res) => {
-    console.log(req.body)
+    check = await db.collection('stats').findOne({ deviceID: req.body.allState.deviceID , stats : req.body.allState.stats});
+    if(check){
+    await db.collection("stats").findOneAndUpdate({ deviceID: req.body.allState.deviceID},{$set : {stats:req.body.allState.stats}},
+        function (err, docs) {
+            if (err){
+                console.log(err)
+                res.send(err)
+            }
+            else{
+                console.log(docs)
+                res.send("success")
+            }})}
+    else{
+        await db.collection("stats").insertOne({ deviceID: req.body.allState.deviceID , stats : req.body.allState.stats},
+            function (err, docs) {
+                if (err){
+                    console.log(err)
+                    res.send(err)
+                }
+                else{
+                    console.log(docs)
+                    res.send("success")
+                }}) 
+    }
 }
 //@ts-ignore
 const get = async (req, res) => {
