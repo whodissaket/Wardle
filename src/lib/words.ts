@@ -39,7 +39,7 @@ export const findFirstUnusedReveal = (word: string, guesses: string[]) => {
   }
 
   // check for the first unused letter, taking duplicate letters
-  // into account - see issue #198
+  
   let n
   for (const letter of splitWord) {
     n = lettersLeftArray.indexOf(letter)

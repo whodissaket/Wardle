@@ -1,10 +1,10 @@
-import { Cell } from '../grid/Cell'
-import { BaseModal } from './BaseModal'
+import { Cell } from "../grid/Cell";
+import { BaseModal } from "./BaseModal";
 
 type Props = {
-  isOpen: boolean
-  handleClose: () => void
-}
+  isOpen: boolean;
+  handleClose: () => void;
+};
 
 export const InfoModal = ({ isOpen, handleClose }: Props) => {
   return (
@@ -58,15 +58,14 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
       </p>
 
       <p className="mt-6 italic text-sm text-gray-500 dark:text-gray-300">
-        This is an open source version of the word guessing game we all know and
-        love -{' '}
+       
         <a
-          href="https://github.com/cwackerfuss/react-wordle"
+          href="https://www.youtube.com/watch?v=8SIiGo3TVKE"
           className="underline font-bold"
         >
-          check out the code here
-        </a>{' '}
+          Dont Click here.
+        </a>{" "}
       </p>
     </BaseModal>
-  )
-}
+  );
+};
